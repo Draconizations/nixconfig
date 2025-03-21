@@ -14,6 +14,7 @@
           nodejs
           bun
           php
+          nixd
         ]
       else
         [ ]
