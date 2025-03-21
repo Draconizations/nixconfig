@@ -53,8 +53,6 @@ let
         "php_admin_value[error_log]" = "stderr";
         "php_admin_flag[log_errors]" = true;
         "catch_workers_output" = true;
-      }
-      // lib.mkIf config.fxlmine.caddy.enable {
         "listen.owner" = config.services.caddy.user;
         "listen.group" = config.services.caddy.group;
       };
