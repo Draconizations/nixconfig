@@ -11,12 +11,12 @@ with lib;
   ];
 
   options.fxlmine = {
-    machineType = mkOption {
+    machine.type = mkOption {
       type = with types; enum [ "server" "wsl" "laptop" "desktop" ];
       default = "server";
     };
 
-    machineUsage = mkOption {
+    machine.purpose = mkOption {
       type = with types; enum [ "personal" "server" ];
       default = "server";
     };

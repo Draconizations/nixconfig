@@ -5,8 +5,8 @@
     meta.nixModules.wsl
   ];
 
-  fxlmine.machineType = "wsl";
-  fxlmine.machineUsage = "personal";
+  fxlmine.machine.type = "wsl";
+  fxlmine.machine.usage = "personal";
 
   system.stateVersion = "24.11";
 }
