@@ -8,6 +8,7 @@ let
     [ "wheel" "systemd-journal" ]
     ++ cfg.extraAdminGroups
     ++ lib.optional config.networking.networkmanager.enable "networkmanager"
+    ++ lib.optional config.fxlmine.docker.enable "docker" 
     ;
 
   mkUserDesc = user: desc: {

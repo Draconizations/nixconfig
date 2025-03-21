@@ -19,5 +19,7 @@ with lib;
       type = with types; enum [ "personal" "server" ];
       default = "server";
     };
+
+    docker.enable = mkEnableOption "Enable docker on this machine" // { default = false; };
   };
 }
