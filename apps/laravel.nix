@@ -22,7 +22,7 @@ let
   mkUser = app: {
     isNormalUser = true;
     homeMode = "755";
-    extraGroups = [ ];
+    extraGroups = [ app.name ];
   };
 
   # hm user
@@ -54,6 +54,7 @@ let
         "php_admin_flag[log_errors]" = true;
         "catch_workers_output" = true;
         "listen.owner" = config.services.caddy.user;
+        "listen.group" = config.services.caddy.group;
       };
   };
 
@@ -78,6 +79,7 @@ in
     default = [ ];
   };
 
+  users.groups = builtins.listToAttrs (map (app: lib.nameValuePair app.name {}) config.fxlmine.laravelApps);
   config.users.users = builtins.listToAttrs (
     map (app: lib.nameValuePair app.name (mkUser app)) config.fxlmine.laravelApps
   );
