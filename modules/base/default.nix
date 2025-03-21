@@ -7,6 +7,8 @@ with lib;
     ./nix.nix
     ./packages.nix
     ./docker.nix
+    ./server.nix
+    ./caddy.nix
     ./users
   ];
 
