@@ -9,7 +9,7 @@
       nmap
       gnupg
     ] ++ (
-      if (osConfig.fxlmine.machineUsage == "personal") then
+      if (osConfig.fxlmine.machine.purpose == "personal") then
         [
           nodejs
           bun
