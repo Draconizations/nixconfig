@@ -1,7 +1,8 @@
 { pkgs, ... }:
 
 {
-    environment.systemPackages = with pkgs; [
+  nixpkgs.config.allowUnfree = true;
+  environment.systemPackages = with pkgs; [
     file
     which
     tmux

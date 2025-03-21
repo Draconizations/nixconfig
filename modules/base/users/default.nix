@@ -22,8 +22,6 @@ let
 
   mkHomeManager = { user, desc, ... }:
   { meta, ... }: {
-    nixpkgs.config.allowUnfree = true;
-
     imports =
       (if (desc ? homeManagerPaths)
       then desc.homeManagerPaths
