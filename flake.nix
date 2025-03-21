@@ -27,6 +27,7 @@
         flake = {
           nixModules = import ./modules;
           hmUsers = import ./users;
+          apps = import ./apps;
         };
       }
     );

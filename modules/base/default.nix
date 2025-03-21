@@ -22,5 +22,7 @@ with lib;
     };
 
     docker.enable = mkEnableOption "Enable docker on this machine" // { default = false; };
+
+    caddy.enable = mkEnableOption "Enable caddy on this machine" // { default = false; };
   };
 }

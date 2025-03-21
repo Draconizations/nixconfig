@@ -39,6 +39,6 @@ in
     # Darwin
 
     # NixOS servers
-
+    (mkNixOS "pulse" "x86_64-linux" {} )
   ];
 }
