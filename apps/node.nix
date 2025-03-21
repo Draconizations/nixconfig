@@ -25,7 +25,7 @@ let
   mkService =
     app:
     let
-      runtime = if (app.runtime) then app.runtime else "node";
+      runtime = if (builtins.hasAttr "runtime" app) then app.runtime else "node";
     in
     {
       wantedBy = [ "multi-user.target" ];
