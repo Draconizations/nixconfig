@@ -20,19 +20,12 @@
       {
         systems = [ "x86_64-linux" ];
 
-        flake.nixosConfigurations.anomaly = inputs.nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+        imports = [
+          ./systems
+        ];
 
-          modules = [
-            inputs.nixos-wsl.nixosModules.default
-            {
-              system.stateVersion = "24.11";
-              wsl.enable = true;
-              wsl.defaultUser = "pals";
-              networking.hostName = "anomaly";
-            }
-            ./packages.nix
-          ];
+        flake = {
+          nixModules = import ./modules;
         };
       }
     );
