@@ -14,6 +14,8 @@ let
         _passthru = {
           inherit hostName system;
         };
+
+        meta = self;
       };
 
       modules = [

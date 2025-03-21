@@ -1,30 +1,23 @@
-{ pkgs, ... }:
+{ lib, ... }:
+with lib;
+
 {
-  environment.systemPackages = with pkgs; [
-    wget
-    micro
-    btop
-    nixd
-    git
-    nixfmt-rfc-style
+  imports = [
+    ./home-manager.nix
+    ./nix.nix
+    ./packages.nix
+    ./users
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  options.fxlmine = {
+    machineType = mkOption {
+      type = with types; enum [ "server" "wsl" "laptop" "desktop" ];
+      default = "server";
+    };
 
-  # Perform garbage collection weekly to maintain low disk usage
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
+    machineUsage = mkOption {
+      type = with types; enum [ "personal" "server" ];
+      default = "server";
+    };
   };
-
-  # Optimize storage
-  # You can also manually optimize the store via:
-  #    nix-store --optimise
-  # Refer to the following link for more details:
-  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
-  nix.settings.auto-optimise-store = true;
 }

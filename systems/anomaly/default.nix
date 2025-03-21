@@ -1,16 +1,12 @@
-{ inputs, pkgs, ... }:
+{ meta, ... }:
 
 {
   imports = [
-    inputs.nixos-wsl.nixosModules.default
+    meta.nixModules.wsl
   ];
 
-  system.stateVersion = "24.11";
-  wsl.enable = true;
-  wsl.defaultUser = "pals";
+  fxlmine.machineType = "wsl";
+  fxlmine.machineUsage = "personal";
 
-  programs.nix-ld = {
-    enable = true;
-    package = pkgs.nix-ld-rs;
-  };
+  system.stateVersion = "24.11";
 }

@@ -1,0 +1,3 @@
+{
+  pals = import ./pals;
+}
