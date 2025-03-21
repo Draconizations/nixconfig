@@ -54,7 +54,6 @@ let
         "php_admin_flag[log_errors]" = true;
         "catch_workers_output" = true;
         "listen.owner" = config.services.caddy.user;
-        "listen.group" = config.services.caddy.group;
       };
   };
 
