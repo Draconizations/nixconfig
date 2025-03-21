@@ -1,4 +1,4 @@
-{ pkgs, fxlmine, ... }:
+{ pkgs, osConfig, ... }:
 {
   home.packages =
     with pkgs;
@@ -9,7 +9,7 @@
       nmap
       gnupg
     ] ++ (
-      if (fxlmine.machineUsage == "personal") then
+      if (osConfig.fxlmine.machineUsage == "personal") then
         [
           nodejs
           bun

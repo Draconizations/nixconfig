@@ -1,7 +1,4 @@
-{ inputs, config, ... } @ toplevel:
-let
-  fxlmine = config.fxlmine;
-in
+{ inputs, ... } @ toplevel:
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -12,7 +9,6 @@ in
     useUserPackages = true;
     extraSpecialArgs = {
       inherit (toplevel) inputs meta _passthru;
-      inherit fxlmine;
     };
   };
 }
