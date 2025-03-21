@@ -6,6 +6,7 @@
     
   wsl.enable = true;
   wsl.defaultUser = "pals";
+  wsl.docker-desktop.enable = true;
 
   environment.systemPackages = [ 
     pkgs.nixfmt-rfc-style
