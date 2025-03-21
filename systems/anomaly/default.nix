@@ -6,7 +6,7 @@
   ];
 
   fxlmine.machine.type = "wsl";
-  fxlmine.machine.usage = "personal";
+  fxlmine.machine.purpose = "personal";
 
   system.stateVersion = "24.11";
 }
