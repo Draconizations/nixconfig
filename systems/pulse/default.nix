@@ -3,10 +3,12 @@
 {
   imports = [
     ./hw.nix
+    ./services.nix
   ];
 
   fxlmine.machine.type = "server";
   fxlmine.machine.purpose = "server";
+  fxlmine.caddy.enable = true;
 
   system.stateVersion = "24.11";
 
