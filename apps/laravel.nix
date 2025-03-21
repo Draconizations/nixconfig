@@ -79,7 +79,7 @@ in
     default = [ ];
   };
 
-  users.groups = builtins.listToAttrs (map (app: lib.nameValuePair app.name {}) config.fxlmine.laravelApps);
+  config.users.groups = builtins.listToAttrs (map (app: lib.nameValuePair app.name {}) config.fxlmine.laravelApps);
   config.users.users = builtins.listToAttrs (
     map (app: lib.nameValuePair app.name (mkUser app)) config.fxlmine.laravelApps
   );
