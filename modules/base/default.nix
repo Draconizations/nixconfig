@@ -6,6 +6,7 @@ with lib;
     ./home-manager.nix
     ./nix.nix
     ./packages.nix
+    ./docker.nix
     ./users
   ];
 
