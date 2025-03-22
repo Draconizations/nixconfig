@@ -27,5 +27,5 @@ with lib;
     caddy.enable = mkEnableOption "Enable caddy on this machine" // { default = false; };
   };
 
-    time.timeZone = mkDefault "Europe/Amsterdam";
+  config.time.timeZone = mkDefault "Europe/Amsterdam";
 }
