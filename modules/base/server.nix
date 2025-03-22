@@ -9,11 +9,7 @@ in
       settings.PasswordAuthentication = false;
     };
 
+    networking.networkmanager.enable = true; 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
   };
-
-  imports = [
-    ../../apps/laravel.nix
-    ../../apps/node.nix
-  ];
 }
