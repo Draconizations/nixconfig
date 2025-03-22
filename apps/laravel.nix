@@ -95,10 +95,10 @@ in
       lib.nameValuePair app.name (mkPool app)
     ) config.fxlmine.laravelApps
   );
-  config.systemd.services = builtins.listToAttrs (
+  config.systemd.services = lib.mkIf config.fxlmine.caddy.enable builtins.listToAttrs (
     map (app: lib.nameValuePair ("phpfpm-" + app.name) (forceHome app)) config.fxlmine.laravelApps
   );
-  config.services.caddy.virtualHosts = builtins.listToAttrs (
+  config.services.caddy.virtualHosts = lib.mkIf config.fxlmine.caddy.enable builtins.listToAttrs (
     map (app: lib.nameValuePair app.url (mkCaddy app)) config.fxlmine.laravelApps
   );
 }
