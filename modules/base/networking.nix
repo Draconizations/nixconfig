@@ -8,9 +8,6 @@ with lib;
   };
 
   programs.ssh.startAgent = mkDefault true;
-  programs.ssh.extraConfig = mkDefault ''
-    AddKeysToAgent yes
-  '';
 
   networking.firewall.allowedTCPPorts = mkDefault [ 80 443 ];
 }

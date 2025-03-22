@@ -3,7 +3,7 @@
 {
   imports = [
     ./packages.nix
-    ./apps.nix
+    ./programs.nix
   ];
 
   home.username = "pals";
