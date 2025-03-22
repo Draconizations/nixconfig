@@ -7,7 +7,5 @@
     userEmail = "jake@fulmine.xyz";
   };
 
-  programs.ssh.extraConfig = ''
-    AddKeysToAgent yes
-  '';
+  services.ssh-agent.enable = true;
 }
