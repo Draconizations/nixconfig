@@ -9,5 +9,5 @@ with lib;
 
   programs.ssh.startAgent = mkDefault true;
 
-  networking.firewall.allowedTCPPorts = mkDefault [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 }
