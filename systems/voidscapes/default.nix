@@ -3,7 +3,7 @@
 {
   imports = [
     ./hw.nix
-    ./services.nix
+    ./apps.nix
   ];
 
   fxlmine.machine.type = "server";
