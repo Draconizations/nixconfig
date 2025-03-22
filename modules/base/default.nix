@@ -6,9 +6,9 @@ with lib;
     ./home-manager.nix
     ./nix.nix
     ./packages.nix
-    ./docker.nix
     ./server.nix
-    ./caddy.nix
+    ./apps
+    ./programs
     ./users
   ];
 
@@ -27,4 +27,6 @@ with lib;
 
     caddy.enable = mkEnableOption "Enable caddy on this machine" // { default = false; };
   };
+
+    time.timeZone = mkDefault "Europe/Amsterdam";
 }

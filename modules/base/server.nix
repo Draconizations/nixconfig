@@ -9,9 +9,6 @@ in
       settings.PasswordAuthentication = false;
     };
 
-    networking.networkmanager.enable = true; 
-    time.timeZone = "Europe/Amsterdam";
-
     networking.firewall.allowedTCPPorts = [ 80 443 ];
   };
 
