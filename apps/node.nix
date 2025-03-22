@@ -66,7 +66,7 @@ in
   config.systemd.services = builtins.listToAttrs (
     map (app: lib.nameValuePair app.name (mkService app)) config.fxlmine.nodeApps
   );
-  config.services.caddy.virtualHosts = lib.mkIf config.fxlmine.caddy.enable builtins.listToAttrs (
+  config.services.caddy.virtualHosts = if config.fxlmine.caddy.enable then builtins.listToAttrs (
     map (app: lib.nameValuePair app.url (mkCaddy app)) config.fxlmine.nodeApps
-  );
+  ) else {};
 }
