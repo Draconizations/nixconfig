@@ -6,7 +6,7 @@ with lib;
     ./home-manager.nix
     ./nix.nix
     ./packages.nix
-    ./server.nix
+    ./networking.nix
     ./apps
     ./programs
     ./users
@@ -24,7 +24,6 @@ with lib;
     };
 
     docker.enable = mkEnableOption "Enable docker on this machine" // { default = false; };
-
     caddy.enable = mkEnableOption "Enable caddy on this machine" // { default = false; };
   };
 
