@@ -35,6 +35,7 @@ let
       nodejs_20
     ];
 
+    services.ssh-agent.enable = true;
     home.stateVersion = "24.11";
   };
 

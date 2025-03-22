@@ -14,6 +14,7 @@ let
       git
     ];
 
+    services.ssh-agent.enable = true;
     home.stateVersion = "24.11";
   };
 
