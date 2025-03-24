@@ -10,6 +10,9 @@
     hyfetch
     fastfetch
     lsof
+    
+    unzip
+    xz
 
     wget
     curl
