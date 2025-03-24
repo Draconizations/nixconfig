@@ -17,5 +17,7 @@
     git
     nano
     micro
+
+    python3
   ];
 }
