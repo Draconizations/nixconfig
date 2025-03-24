@@ -19,5 +19,6 @@
     micro
 
     python3
+    gnumake
   ];
 }
