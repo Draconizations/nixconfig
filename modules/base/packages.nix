@@ -21,4 +21,10 @@
     python3
     gnumake
   ];
+
+  # needed for vscode server to work
+  programs.nix-ld = {
+    enable = true;
+    package = pkgs.nix-ld-rs;
+  };
 }
