@@ -3,7 +3,7 @@
   fxlmine.laravelApps = [
     { name = "critterworld"; url = "critter.quest"; }
     { name = "palsworld"; url = "world.pals.gay";}    
-    { name = "lkfulmen"; url = "fulmenite.net";}
+    { name = "lkfulmen"; url = "fulmenite.net"; backup = true; }
   ];
 
   fxlmine.nodeApps = [

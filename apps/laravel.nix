@@ -69,6 +69,26 @@ let
     '';
   };
 
+  mkService = app: {
+    script = ''
+      cd /home/${app.name}/app
+      php artisan backup:run
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = app.name;
+    };
+  };
+
+  mkTimer = app: {
+    wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "daily";
+        Persistent = true; 
+        Unit = "backup-${app.name}.service";
+      };
+  };
+
   forceHome = app: {
     serviceConfig = {
       ProtectHome = lib.mkForce false;
@@ -102,4 +122,16 @@ in
   config.services.caddy.virtualHosts = if config.fxlmine.caddy.enable then builtins.listToAttrs (
     map (app: lib.nameValuePair app.url (mkCaddy app)) config.fxlmine.laravelApps
   ) else {};
+
+  config.systemd.services = builtins.listToAttrs (
+    map (app: lib.nameValuePair ("backup-" + app.name)
+      (if app.backup != null then mkService app else {}))
+    config.fxlmine.laravelApps
+  );
+
+  config.systemd.timers = builtins.listToAttrs (
+    map (app: lib.nameValuePair ("backup-" + app.name) 
+      (if app.backup != null then mkTimer app else {}))
+    config.fxlmine.laravelApps
+  );
 }
