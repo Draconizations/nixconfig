@@ -41,10 +41,11 @@ let
     systemd.user.services."backup-${app.name}" = if app.backup == true then {
       Service = {
         Type = "oneshot";
-        ExecStart = ''
-          cd /home/${app.name}/app
-          php artisan backup:run
-        '';
+        ExecStart = writeShellScript "backup-${app-name}"
+          ''
+            cd /home/${app.name}/app
+            php artisan backup:run
+          '';
       };
       Install.WantedBy = [ "default.target" ];
     } else {};
