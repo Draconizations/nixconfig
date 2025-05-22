@@ -38,7 +38,7 @@ let
     services.ssh-agent.enable = true;
     home.stateVersion = "24.11";
 
-    systemd.user.services.backup-${app.name} = if app.backup == true then {
+    systemd.user.services."backup-${app.name}" = if app.backup == true then {
       Service = {
         Type = "oneshot";
         execStart = ''
@@ -49,7 +49,7 @@ let
       Install.WantedBy = [ "default.target" ];
     } else {};
 
-    systemd.user.timers.backup-${app.name} = if app.backup == true then {
+    systemd.user.timers."backup-${app.name}" = if app.backup == true then {
       Timer = {
         OnCalendar = "daily";
         Persistent = true; 
