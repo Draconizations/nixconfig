@@ -44,7 +44,7 @@ let
         ExecStart = writeShellScript "backup-${app.name}"
           ''
             cd /home/${app.name}/app
-            php artisan backup:run
+            /etc/profiles/per-user/${app.name}/bin/php artisan backup:run
           '';
       };
       Install.WantedBy = [ "default.target" ];
