@@ -44,7 +44,8 @@ let
         ExecStart = writeShellScript "backup-${app.name}"
           ''
             cd /home/${app.name}/app
-            /etc/profiles/per-user/${app.name}/bin/php artisan backup:run
+            nix-shell -p mariadb gzip php
+            php artisan backup:run
           '';
       };
       Install.WantedBy = [ "default.target" ];
