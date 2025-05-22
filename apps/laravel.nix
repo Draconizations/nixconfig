@@ -34,6 +34,7 @@ let
       git
       nodejs_20
       gzip
+      mariadb
     ];
 
     services.ssh-agent.enable = true;
@@ -42,7 +43,7 @@ let
     systemd.user.services."backup-${app.name}" = if app.backup == true then {
       Service = {
         Type = "oneshot";
-        Environment="PATH=/home/${app.name}/.nix-profile/bin/";
+        Environment="PATH=/etc/profiles/per-user/${app.name}/bin";
         ExecStart = writeShellScript "backup-${app.name}"
           ''
             cd /home/${app.name}/app
