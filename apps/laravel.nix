@@ -37,6 +37,26 @@ let
 
     services.ssh-agent.enable = true;
     home.stateVersion = "24.11";
+
+    systemd.user.services.backup-${app.name} = if app.backup == true then {
+      Service = {
+        Type = "oneshot";
+        execStart = ''
+          cd /home/${app.name}/app
+          php artisan backup:run
+        '';
+      };
+      Install.WantedBy = [ "default.target" ];
+    } else {};
+
+    systemd.user.timers.backup-${app.name} = if app.backup == true then {
+      Timer = {
+        OnCalendar = "daily";
+        Persistent = true; 
+        Unit = "backup-${app.name}.service";
+      };
+      Install.WantedBy = [ "timers.target" ];
+    } else {};
   };
 
   # app phpfpm pool
@@ -69,26 +89,6 @@ let
     '';
   };
 
-  mkService = app: {
-    script = ''
-      cd /home/${app.name}/app
-      php artisan backup:run
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = app.name;
-    };
-  };
-
-  mkTimer = app: {
-    wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnCalendar = "daily";
-        Persistent = true; 
-        Unit = "backup-${app.name}.service";
-      };
-  };
-
   forceHome = app: {
     serviceConfig = {
       ProtectHome = lib.mkForce false;
@@ -117,23 +117,12 @@ in
     ) config.fxlmine.laravelApps
   );
 
-  config.systemd.services = builtins.listToAttrs(
+  config.systemd.services = if config.fxlmine.caddy.enable then builtins.listToAttrs(
     map (app: lib.nameValuePair ("phpfpm-" + app.name)
-        (if config.fxlmine.caddy.enable then forceHome app else {}))
-        config.fxlmine.laravelApps
-        ++
-    map (app: lib.nameValuePair ("backup-" + app.name)
-        (if app.backup == true then mkService app else {}))
-      config.fxlmine.laravelApps
-  ); 
+      (forceHome app)) config.fxlmine.laravelApps
+  ) else {};
   
   config.services.caddy.virtualHosts = if config.fxlmine.caddy.enable then builtins.listToAttrs (
     map (app: lib.nameValuePair app.url (mkCaddy app)) config.fxlmine.laravelApps
   ) else {};
-
-  config.systemd.timers = builtins.listToAttrs (
-    map (app: lib.nameValuePair ("backup-" + app.name) 
-      (if app.backup == true then mkTimer app else {}))
-    config.fxlmine.laravelApps
-  );
 }
