@@ -124,7 +124,7 @@ in
     map (app: lib.nameValuePair ("backup-" + app.name)
       (if app.backup != null then mkService app else {}))
     config.fxlmine.laravelApps
-  ]
+  ];
   
   config.services.caddy.virtualHosts = if config.fxlmine.caddy.enable then builtins.listToAttrs (
     map (app: lib.nameValuePair app.url (mkCaddy app)) config.fxlmine.laravelApps
