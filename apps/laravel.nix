@@ -116,18 +116,21 @@ in
       lib.nameValuePair app.name (mkPool app)
     ) config.fxlmine.laravelApps
   );
-  config.systemd.services = if config.fxlmine.caddy.enable then builtins.listToAttrs (
-    map (app: lib.nameValuePair ("phpfpm-" + app.name) (forceHome app)) config.fxlmine.laravelApps
-  ) else {};
+
+  config.systemd.services = builtins.listToAttrs (
+    mkMerge [
+      map (app: lib.nameValuePair ("phpfpm-" + app.name)
+      (if config.flxmine.caddy.enable then forceHome app else {}))
+        config.fxlmine.laravelApps
+      map (app: lib.nameValuePair ("backup-" + app.name)
+        (if app.backup != null then mkService app else {}))
+      config.fxlmine.laravelApps
+    ]
+  );
+  
   config.services.caddy.virtualHosts = if config.fxlmine.caddy.enable then builtins.listToAttrs (
     map (app: lib.nameValuePair app.url (mkCaddy app)) config.fxlmine.laravelApps
   ) else {};
-
-  config.systemd.services = builtins.listToAttrs (
-    map (app: lib.nameValuePair ("backup-" + app.name)
-      (if app.backup != null then mkService app else {}))
-    config.fxlmine.laravelApps
-  );
 
   config.systemd.timers = builtins.listToAttrs (
     map (app: lib.nameValuePair ("backup-" + app.name) 
