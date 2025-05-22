@@ -133,7 +133,7 @@ in
 
   config.systemd.timers = builtins.listToAttrs (
     map (app: lib.nameValuePair ("backup-" + app.name) 
-      (if app.backup != null then mkTimer app else {}))
+      (if app.backup == true then mkTimer app else {}))
     config.fxlmine.laravelApps
   );
 }
