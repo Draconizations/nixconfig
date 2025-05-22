@@ -117,17 +117,15 @@ in
     ) config.fxlmine.laravelApps
   );
 
-  config.systemd.services = lib.mkMerge [
-    builtins.listToAttrs (
+  config.systemd.services = 
+    builtins.listToAttrs (lib.mkMerge [
       map (app: lib.nameValuePair ("phpfpm-" + app.name)
         (if config.fxlmine.caddy.enable then forceHome app else {}))
-      config.fxlmine.laravelApps
-    )
-    builtins.listToAttrs (
+        config.fxlmine.laravelApps
       map (app: lib.nameValuePair ("backup-" + app.name)
         (if app.backup == true then mkService app else {}))
-      config.fxlmine.laravelApps)
-  ];
+      config.fxlmine.laravelApps
+    ]);
   
   config.services.caddy.virtualHosts = if config.fxlmine.caddy.enable then builtins.listToAttrs (
     map (app: lib.nameValuePair app.url (mkCaddy app)) config.fxlmine.laravelApps
