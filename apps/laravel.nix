@@ -125,7 +125,7 @@ in
     )
     builtins.listToAttrs (
       map (app: lib.nameValuePair ("backup-" + app.name)
-        (if app.backup != null then mkService app else {}))
+        (if app.backup == true then mkService app else {}))
       config.fxlmine.laravelApps)
   ];
   
