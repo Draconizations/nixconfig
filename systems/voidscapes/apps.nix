@@ -1,9 +1,9 @@
 { ... }:
 {
   fxlmine.laravelApps = [
-    { name = "critterworld"; url = "critter.quest"; backup = false; }
-    { name = "palsworld"; url = "world.pals.gay"; backup = false; }    
-    { name = "lkfulmen"; url = "fulmenite.net"; backup = true; }
+    { name = "critterworld"; url = "critter.quest"; schedule = false; }
+    { name = "palsworld"; url = "world.pals.gay"; schedule = false; }    
+    { name = "lkfulmen"; url = "fulmenite.net"; schedule = true; }
   ];
 
   fxlmine.nodeApps = [

@@ -23,6 +23,7 @@ let
     isNormalUser = true;
     homeMode = "755";
     extraGroups = [ app.name ];
+    linger = true;
   };
 
   # hm user
@@ -40,24 +41,25 @@ let
     services.ssh-agent.enable = true;
     home.stateVersion = "24.11";
 
-    systemd.user.services."backup-${app.name}" = if app.backup == true then {
+    systemd.user.services."schedule-${app.name}" = if app.schedule == true then {
       Service = {
         Type = "oneshot";
         Environment="PATH=/etc/profiles/per-user/${app.name}/bin";
-        ExecStart = writeShellScript "backup-${app.name}"
+        ExecStart = writeShellScript "schedule-${app.name}"
           ''
             cd /home/${app.name}/app
-            php artisan backup:run
+            php artisan schedule:run
           '';
       };
       Install.WantedBy = [ "default.target" ];
     } else {};
 
-    systemd.user.timers."backup-${app.name}" = if app.backup == true then {
+    systemd.user.timers."schedule-${app.name}" = if app.schedule == true then {
       Timer = {
-        OnCalendar = "daily";
+        OnCalendar = "minutely";
+        AccuracySec="1us";
         Persistent = true; 
-        Unit = "backup-${app.name}.service";
+        Unit = "schedule-${app.name}.service";
       };
       Install.WantedBy = [ "timers.target" ];
     } else {};
