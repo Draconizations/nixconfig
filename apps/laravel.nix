@@ -120,7 +120,7 @@ in
   config.systemd.services = lib.mkMerge [
     builtins.listToAttrs (
       map (app: lib.nameValuePair ("phpfpm-" + app.name)
-        (if config.flxmine.caddy.enable then forceHome app else {}))
+        (if config.fxlmine.caddy.enable then forceHome app else {}))
       config.fxlmine.laravelApps
     )
     builtins.listToAttrs (
