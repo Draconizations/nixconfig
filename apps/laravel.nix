@@ -41,7 +41,7 @@ let
     systemd.user.services."backup-${app.name}" = if app.backup == true then {
       Service = {
         Type = "oneshot";
-        execStart = ''
+        ExecStart = ''
           cd /home/${app.name}/app
           php artisan backup:run
         '';
